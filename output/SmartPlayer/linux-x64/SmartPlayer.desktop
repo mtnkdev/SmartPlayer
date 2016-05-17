@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=0.1
+Name=SmartPlayer
+Comment=
+Exec=/home/renatonolo/Documentos/SmartPlayer/output/SmartPlayer/linux-x64/SmartPlayer
+Icon=/home/renatonolo/Documentos/SmartPlayer/output/SmartPlayer/linux-x64/icon.png
+Terminal=false
+Type=Application
+Categories=Utility;Application;

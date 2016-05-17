@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SmartPlayer</title>
+    <link rel="stylesheet" href="styles/normalize.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" type="text/css" href="styles/views.css">
+</head>
+
+<body ng-app="AppModule">
+    
+    <div class="content">
+
+        <div class="toolBar">
+            <img src="images/top-close.png" style="display: inline; padding: 5px;" onClick="appGUI.close()"/>
+            <img src="images/top-minus.png" style="display: inline; padding: 5px;" onClick="appGUI.minimize()"/>
+            <img src="images/top-square.png" style="display: inline; padding: 5px;" onClick="appGUI.maximize()"/>
+            <span class="material-icons" ui-sref="showSettings" style="font-size: 16px; color: #DDD; float: right; cursor: pointer;">&#xE8B8;</span>
+        </div>
+
+
+        <div class="left" class="clearfix" auto-resize ng-style="resizeWithOffset(50)">
+            <div class="your_musics">
+                <h3 style="padding: 5px; color: #E91E63; cursor: initial;">SUAS MUSICAS</h3>
+                <h3 id="btn_albuns" class="clickable" style="padding: 8px; padding-left: 5px;" ui-sref="showByAlbums">Albuns</h3>
+                <h3 id="btn_artists" class="clickable" style="padding: 8px; padding-left: 5px;" ui-sref="showByArtists">Artistas</h3>
+                <h3 id="btn_musics" class="clickable" style="padding: 8px; padding-left: 5px;" ui-sref="showByMusics">Músicas</h3>
+            </div>
+            <div class="albumMusic">
+                <!--<img class="imgAlbum" id="imgAlbum"/>-->
+            </div>
+        </div>
+        
+        <div class="right" ui-view></div>
+
+    </div>
+
+    <div class="player" ng-controller="PlayerCtrl">
+        <audio id="audioPlayer"></audio>
+        <input type="hidden" id="txtMusicPlaying" value=""/>
+        <input type="hidden" id="txtEventsCreated" value="0"/>
+        <input type="hidden" id="txtRandomEnabled" value="0"/>
+        <input type="hidden" id="txtLoopEnabled" value="0"/>
+
+        <div>
+            <div id="invisibleBkgAudioProgressBar">
+                <div class="bkgAudioProgressBar" id="bkgAudioProgressBar"></div>
+                <div class="audioProgressBarPreview" id="audioProgressBarPreview"></div>
+                <div class="audioProgressBar" id="audioProgressBar"></div>
+                <div class="audioBubbleProgress" id="audioBubbleProgress"></div>
+                <span id="spanCurrentTime" style="float: right; margin-top: -15px; margin-right: 5px;">00:00</span>
+            </div>
+
+            <div class="playerButtons clearfix">
+                <div class="button" style="font-size: 20pt;" ng-click="btnPreviousClick()">&#xE045;</div>
+                <div id="playButton" class="button" style="font-size: 24pt;" ng-click="btnPlayClick()">&#xE039;</div>
+                <div class="button" style="font-size: 20pt;" ng-click="btnNextClick()">&#xE044;</div>
+            </div>
+
+            <div class="albumMusic">
+                <img class="imgAlbum" id="imgAlbum" width='45px'/>
+            </div>
+
+            <div class="musicInfo clearfix">
+                <span id="txtMusicName" style="font-weight: bold; font-size: 10pt;"></span><br/>
+                <span id="txtMusicArtist"></span><br/>
+                <span id="txtMusicAlbum"></span>
+            </div>
+
+            <div class="playerExtraButtons clearfix">
+                <div class="button" id="btnLoop" style="font-size: 12pt;" ng-click="btnLoopClick()">&#xE028;</div>
+                <div class="button" id="btnRandom" style="font-size: 12pt;" ng-click="btnRandomClick()">&#xE043;</div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<!-- Vendors -->
+<script src="scripts/vendor/jquery-2.1.4.min.js"></script>
+<script src="scripts/vendor/angular.min.js"></script>
+<script src="scripts/vendor/angular-ui-router.js"></script>
+<script src="scripts/vendor/nw-fileDialog.js"></script>
+
+
+<!-- app -->
+<script src="scripts/app.js"></script>
+<script src="scripts/system/core.js"></script>
+<script src="scripts/system/config.js"></script>
+
+<!-- controllers -->
+<script src="scripts/controllers/musicsCtrl.js"></script>
+<script src="scripts/controllers/playerCtrl.js"></script>
+<script src="scripts/controllers/settingsCtrl.js"></script>
+
+<!-- services -->
+<script src="scripts/services/settingsService.js"></script>
+<script src="scripts/services/musicsService.js"></script>
+<script src="scripts/services/dbService.js"></script>
+<script src="scripts/services/lastFmService.js"></script>
+
+<!-- directives -->
+<script src="scripts/directives/loaderDirective.js"></script>
+<script src="scripts/directives/autoResize.js"></script>
+<script src="scripts/directives/playerDirective.js"></script>
+<script src="scripts/directives/rightClickDirective.js"></script>
+
+</html>

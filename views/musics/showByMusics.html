@@ -1,0 +1,69 @@
+<div ng-keydown="onKeyDown($event)" ng-keyup="onKeyUp($event)" tabindex="1" style="outline:none;">
+{{view="showByMusics";""}}
+<loader infinite="false" value="{{loadBarMusics}}"></loader>
+    <div ng-if="isSettedMusicsPath">
+        <div style="overflow: auto;" auto-resize ng-style="resizeWithOffset(90)">
+            <table class="showMusics">
+                <thead>
+                    <tr>
+                        <th style="text-align: center;" ng-click="orderBy('track')">#</th>
+                        <th ng-click="orderBy('title')">Música</th>
+                        <th style="text-align: center;" ng-click="orderBy('duration');">Duração</th>
+                        <th ng-click="orderBy('album')">Album</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="row_{{music.uuid}}" class="rows" ng-right-click="onRightClick($event, music)" ng-repeat="music in musics" class="clickable" ng-click="musicPlayClick(music.uuid, music.musicPath)">
+                        <td style="text-align: center;">{{music.trackNum}}</td>
+                        <td>{{music.musicName}}</td>
+                        <td style="text-align: center;">{{music.durationFormatted}}</td>
+                        <td>{{music.album}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="selectPathWindow" ng-if="!isSettedMusicsPath">
+        <h1>Selecione a sua pasta de músicas</h1>
+        <button ng-click="configMusicsPath()">Selecionar pasta de músicas</button>
+    </div>
+
+    <div class="bkgPopup" id="bkgPopup"></div>
+
+    <div id="popupOptions" class="popup">
+        <ul class="listPopup">
+            <li id="popupBtnProperties">Propriedades</li>
+        </ul>
+    </div>
+
+    <div id="popupProperties" class="popup">
+        <h3>MP3 Tags</h3>
+        <br/>
+        File name:<br/>
+        <input type="text" id="fileName">
+        <br/>
+        Título:<br/>
+        <input type="text" id="title">
+        <br/>
+        Artista:<br/>
+        <input type="text" id="artist">
+        <br/>
+        Album:<br/>
+        <input type="text" id="album">
+        <br/>
+        Ano:<br/>
+        <input type="text" id="year">
+        <br/>
+        Comentário:<br/>
+        <input type="text" id="comment">
+        <br/>
+        Faixa:<br/>
+        <input type="text" id="track">
+        <br/>
+        Gênero:<br/>
+        <input type="text" id="genre">
+        <br/>
+    </div>
+
+</div>

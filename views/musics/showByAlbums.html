@@ -1,0 +1,51 @@
+<div>
+    {{view="showByAlbums";""}}
+    
+    <loader infinite="false" value="{{loadBarMusics}}"></loader>
+
+    <div ng-if="isSettedMusicsPath">
+        
+        <div style="overflow: auto;" auto-resize ng-style="resizeWithOffset(90)" ng-show="!showMusicsAlbum">
+            <ul class="albumView">
+                <li ng-repeat="album in albums" ng-click="openAlbum(album.artist, album.album)">
+                        <img id="albumImgAlbum" src="{{album.albumSet}}"/>
+                        <div class="albumLegend" ng-show="album.albumSet!=''";>{{album.shortAlbum}}</div>
+                </li>
+            </ul>
+        </div>
+
+        <div style="overflow: auto;" auto-resize ng-style="resizeWithOffset(90)" ng-show="showMusicsAlbum">
+            <span class="btnBack" style="margin-left: 10px; line-height: 30px;" ng-click="backToAlbums()">Voltar</span>
+
+            <div class="bkgAlbumInfo clearfix" style="background-image: url({{musics[0].albumSet}});"></div>
+            <div class="albumInfo">
+                <img style="float: left; margin-left: 20px; width: 200px; height: 200px; margin-right: 20px;" src="{{musics[0].albumSet}}"/>
+                <span style="display: block; font-size: 2.4em; color: #E91E63;">{{musics[0].album}}</span>
+                <span style="display: block; font-size: 1.6em; color: #DDD;">{{musics[0].year}}</span>
+            </div>
+            <table class="showMusics" style="margin-top: 10px;">
+                <thead>
+                    <tr>
+                        <th style="text-align: center;" ng-click="orderBy('track')">#</th>
+                        <th ng-click="orderBy('title')">Música</th>
+                        <th style="text-align: center;" ng-click="orderBy('duration');">Duração</th>
+                        <th ng-click="orderBy('album')">Album</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="row_{{music.uuid}}" class="rows" ng-repeat="music in musics" class="clickable" ng-click="musicPlayClick(music.uuid, music.musicPath)">
+                        <td style="text-align: center;">{{music.trackNum}}</td>
+                        <td>{{music.musicName}}</td>
+                        <td style="text-align: center;">{{music.durationFormatted}}</td>
+                        <td>{{music.album}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="selectPathWindow" ng-if="!isSettedMusicsPath">
+        <h1>Selecione a sua pasta de músicas</h1>
+        <button ng-click="configMusicsPath()">Selecionar pasta de músicas</button>
+    </div>
+</div>
